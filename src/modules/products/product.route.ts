@@ -1,12 +1,9 @@
 import express, { Request, Response } from 'express';
 import { Product } from './product.model';
+import { ProductControllers } from './product.controller';
 
 const router = express.Router();
 
-router.post('/', async (req: Request, res: Response) => {
-  console.log(req.body);
-
-  // const result = await Product.create(req.body);
-});
+router.post('/', ProductControllers.createProduct);
 
 export const ProductRoutes = router;
