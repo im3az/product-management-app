@@ -26,10 +26,29 @@ const deleteProduct = async (_id: string) => {
   return result;
 };
 
+const searchProducts = async (searchTerm: string) => {
+  const trimmedQuery = searchTerm.trim().toLowerCase();
+  const regex = new RegExp(trimmedQuery, 'i');
+  const result = await Product.find({
+    $or: [
+      { name: { $regex: regex } },
+      { description: { $regex: regex } },
+      { category: { $regex: regex } },
+    ],
+  });
+
+  if (result.length === 0) {
+    throw new Error('No products found.');
+  }
+
+  return result;
+};
+
 export const ProductServices = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
 };
