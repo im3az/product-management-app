@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { ProductRoutes } from './modules/products/product.route';
 import { OrderRoutes } from './modules/orders/order.route';
 const app = express();

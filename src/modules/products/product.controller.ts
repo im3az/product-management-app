@@ -65,7 +65,7 @@ const updateProduct = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Product updated successfully!',
-      data: null,
+      data: result,
     });
   } catch (error) {
     console.log(error);
