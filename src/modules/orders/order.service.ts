@@ -11,7 +11,22 @@ const getAllOrders = async () => {
   return result;
 };
 
+const searchOrders = async (email: string) => {
+  const trimmedQuery = email.trim().toLowerCase();
+  const regex = new RegExp(trimmedQuery, 'i');
+  const result = await Order.find({
+    $or: [{ email: { $regex: regex } }],
+  });
+
+  if (result.length === 0) {
+    throw new Error('No orders found for the provided email.');
+  }
+
+  return result;
+};
+
 export const OrderServices = {
   createOrder,
   getAllOrders,
+  searchOrders,
 };
